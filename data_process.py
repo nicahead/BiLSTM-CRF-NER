@@ -7,9 +7,7 @@
 import os
 import re
 
-train_dir = 'data/train'
-test_dir = 'data/test'
-
+init_dir = 'data/init'
 
 def get_entities(dir):
     """
@@ -21,7 +19,7 @@ def get_entities(dir):
     files = os.listdir(dir)  # 所有文件名
     files = list(set([file.split('.')[0] for file in files]))  # 所有不重复的文件名
     for file in files:
-        path = os.path.join(train_dir, file + '.ann')
+        path = os.path.join(init_dir, file + '.ann')
         # 读取文件的每一行 T1	Disease 1845 1850	1型糖尿病
         with open(path, 'r', encoding='utf8') as f:
             for line in f.readlines():
@@ -196,9 +194,9 @@ def split_text(text):
 
 
 if __name__ == '__main__':
-    files = os.listdir(train_dir)
+    files = os.listdir(init_dir)
     files = list(set([file.split('.')[0] for file in files]))
-    path = os.path.join(train_dir, files[1] + '.txt')
+    path = os.path.join(init_dir, files[1] + '.txt')
     with open(path, 'r', encoding='utf8') as f:
         text = f.read()
         print(split_text(text))
